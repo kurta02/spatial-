@@ -1,0 +1,71 @@
+# Environment and secrets
+.env
+*.key
+config/secrets.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Database files
+*.db
+*.sqlite3
+review_undo.db
+
+# Logs
+logs/
+*.log
+data/logs/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data and workspace
+data/workspace/
+data/conversations/
+*.json.bak
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Flask
+instance/
+
+# Backup files
+*.bak
+*.backup
+*~

@@ -1,0 +1,78 @@
+{
+  "chatgpt": {
+    "model": "gpt-4o",
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "timeout": 30,
+    "description": "OpenAI GPT-4o - Fast, reliable, general purpose",
+    "capabilities": ["text_generation", "code_analysis", "reasoning", "file_reading"],
+    "permissions": ["read_files", "search_memory"],
+    "rate_limits": {
+      "requests_per_minute": 500,
+      "tokens_per_minute": 30000
+    }
+  },
+  "claude": {
+    "model": "claude-3-5-sonnet-20241022",
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "timeout": 30,
+    "description": "Anthropic Claude Code - Advanced reasoning and code analysis",
+    "capabilities": ["text_generation", "code_analysis", "reasoning", "file_reading", "complex_tasks"],
+    "permissions": ["read_files", "search_memory", "system_analysis"],
+    "rate_limits": {
+      "requests_per_minute": 200,
+      "tokens_per_minute": 20000
+    }
+  },
+  "local": {
+    "model": "llama3",
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "timeout": 60,
+    "description": "Local LLM - Private, full access model",
+    "capabilities": ["text_generation", "code_analysis", "file_operations", "workspace_management"],
+    "permissions": ["read_files", "write_files", "delete_files", "search_memory", "workspace_access"],
+    "rate_limits": {
+      "requests_per_minute": 60,
+      "tokens_per_minute": 10000
+    },
+    "local_config": {
+      "host": "localhost",
+      "port": 11434,
+      "endpoint": "/api/generate"
+    }
+  },
+  "system_settings": {
+    "default_model": "chatgpt",
+    "fallback_model": "local",
+    "enable_collaboration": true,
+    "max_concurrent_requests": 3,
+    "context_sharing": true,
+    "memory_integration": true,
+    "file_access_logging": true,
+    "permission_enforcement": true
+  },
+  "collaboration_settings": {
+    "coordinator_model": "claude",
+    "task_distribution": {
+      "analysis": ["claude", "chatgpt"],
+      "file_operations": ["local"],
+      "general_tasks": ["chatgpt", "claude", "local"],
+      "code_review": ["claude", "chatgpt"],
+      "documentation": ["claude", "chatgpt"]
+    },
+    "handoff_protocols": {
+      "analysis_to_implementation": {
+        "from": ["claude", "chatgpt"],
+        "to": "local",
+        "trigger": "file_write_needed"
+      },
+      "complex_reasoning": {
+        "from": "chatgpt",
+        "to": "claude",
+        "trigger": "complexity_threshold"
+      }
+    }
+  }
+}
