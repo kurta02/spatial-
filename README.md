@@ -1,6 +1,6 @@
 # Spatial Constellation System
 
-Kurt's Spatial AI Operating System - A unified multi-LLM orchestration platform with persistent memory and collaborative intelligence.
+Kurt's Spatial AI Operating System - A sophisticated multi-AI collaboration system with Manus's advanced agent coordination, featuring cost-optimized local-first processing, persistent memory, and collaborative intelligence.
 
 ## Overview
 

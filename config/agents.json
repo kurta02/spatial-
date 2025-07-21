@@ -1,0 +1,101 @@
+{
+  "local_models": {
+    "primary": {
+      "name": "llama3",
+      "endpoint": "http://localhost:11434/api/generate",
+      "model": "llama3:latest",
+      "capabilities": ["general", "coding", "analysis", "coordination"],
+      "max_tokens": 2000,
+      "temperature": 0.7,
+      "cost_per_token": 0.0
+    },
+    "validator": {
+      "name": "mistral",
+      "endpoint": "http://localhost:11434/api/generate",
+      "model": "mistral:latest",
+      "capabilities": ["validation", "review", "quality_check", "verification"],
+      "max_tokens": 1000,
+      "temperature": 0.3,
+      "cost_per_token": 0.0
+    },
+    "specialist": {
+      "name": "dolphin",
+      "endpoint": "http://localhost:11434/api/generate",
+      "model": "dolphin-mixtral:latest",
+      "capabilities": ["coding", "technical_analysis", "problem_solving"],
+      "max_tokens": 2000,
+      "temperature": 0.5,
+      "cost_per_token": 0.0
+    }
+  },
+  "api_models": {
+    "gpt4": {
+      "name": "gpt-4",
+      "provider": "openai",
+      "capabilities": ["complex_reasoning", "specialized_tasks", "creative_writing", "advanced_analysis"],
+      "cost_per_token": 0.00003,
+      "max_tokens": 4000,
+      "temperature": 0.7
+    },
+    "claude": {
+      "name": "claude-3-sonnet",
+      "provider": "anthropic",
+      "capabilities": ["analysis", "coding", "reasoning", "long_context"],
+      "cost_per_token": 0.000015,
+      "max_tokens": 4000,
+      "temperature": 0.7
+    },
+    "gpt4o": {
+      "name": "gpt-4o",
+      "provider": "openai",
+      "capabilities": ["multimodal", "vision", "complex_reasoning"],
+      "cost_per_token": 0.000005,
+      "max_tokens": 4000,
+      "temperature": 0.7
+    }
+  },
+  "task_routing": {
+    "simple": {
+      "primary_agent": "local_primary",
+      "validation_required": false,
+      "escalation_threshold": 0.8
+    },
+    "moderate": {
+      "primary_agent": "local_primary",
+      "validation_agent": "local_validator",
+      "validation_required": true,
+      "escalation_threshold": 0.6
+    },
+    "complex": {
+      "primary_agent": "api_specialist",
+      "validation_agent": "local_validator",
+      "validation_required": true,
+      "human_approval": false
+    },
+    "critical": {
+      "primary_agent": "api_specialist",
+      "validation_agent": "api_specialist_secondary",
+      "validation_required": true,
+      "human_approval": true
+    }
+  },
+  "cost_optimization": {
+    "daily_budget": 5.0,
+    "cost_tracking": true,
+    "prefer_local": true,
+    "escalation_cost_threshold": 0.50
+  },
+  "memory_integration": {
+    "store_all_interactions": true,
+    "importance_scoring": true,
+    "context_preservation": true,
+    "session_continuity": true
+  },
+  "safety_settings": {
+    "require_validation": true,
+    "human_oversight_critical": true,
+    "git_backup_frequency": "daily",
+    "rollback_enabled": true
+  }
+}
+
