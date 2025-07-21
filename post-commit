@@ -1,0 +1,21 @@
+#!/bin/bash
+# Post-commit hook for Codex supervision
+# This ensures Codex logs each step in codex_log.md
+
+echo "🔍 Post-commit: Verifying Codex compliance..."
+
+# Check if this is a Codex commit (contains step format)
+if git log --format=%B -n 1 | grep -q "^Step [0-9]\+:"; then
+    echo "✅ Codex step commit detected"
+    
+    # Verify codex_log.md was updated
+    if git diff --name-only HEAD~1 | grep -q "codex_log.md"; then
+        echo "✅ codex_log.md was updated"
+    else
+        echo "⚠️  WARNING: Codex commit without log update"
+    fi
+else
+    echo "ℹ️  Regular commit (not Codex step)"
+fi
+
+echo "✅ Post-commit check complete"
