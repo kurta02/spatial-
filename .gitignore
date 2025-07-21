@@ -36,10 +36,12 @@ ENV/
 *.sqlite3
 review_undo.db
 
-# Logs
-logs/
-*.log
-data/logs/
+# Data directory (runtime files)
+data/logs/*.log
+data/logs/*.pid
+data/workspace/*
+!data/workspace/README.md
+data/conversations/*.json
 
 # IDE files
 .vscode/
@@ -52,11 +54,6 @@ data/logs/
 .DS_Store
 Thumbs.db
 
-# Data and workspace
-data/workspace/
-data/conversations/
-*.json.bak
-
 # Test coverage
 .coverage
 htmlcov/
@@ -65,7 +62,14 @@ htmlcov/
 # Flask
 instance/
 
+# Chrome browser data (accidentally committed)
+**/google-chrome/**
+**/Network\ Persistent\ State
+
 # Backup files
 *.bak
 *.backup
 *~
+
+# Compiled Python
+*.pyc
