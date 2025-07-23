@@ -100,13 +100,13 @@ class LLMConfig:
     # Brain configuration (legacy compatibility)
     BRAIN_CONFIG = {
         'openai': {
-            'api_key': None,  # Uses OPENAI_API_KEY environment variable
+            'api_key': Config.OPENAI_API_KEY,  # Load from environment variable
             'model': 'gpt-4o',
             'max_tokens': 4000
         },
         'anthropic': {
-            'api_key': None,  # Uses ANTHROPIC_API_KEY environment variable
-            'model': 'claude-3-5-sonnet',
+            'api_key': Config.ANTHROPIC_API_KEY,  # Load from environment variable
+            'model': 'claude-3-5-sonnet-20241022',
             'max_tokens': 4000
         },
         'local': {
