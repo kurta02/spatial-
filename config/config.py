@@ -96,6 +96,25 @@ class LLMConfig:
         "max_tokens": 4000,
         "timeout": 60
     }
+    
+    # Brain configuration (legacy compatibility)
+    BRAIN_CONFIG = {
+        'openai': {
+            'api_key': None,  # Uses OPENAI_API_KEY environment variable
+            'model': 'gpt-4o',
+            'max_tokens': 4000
+        },
+        'anthropic': {
+            'api_key': None,  # Uses ANTHROPIC_API_KEY environment variable
+            'model': 'claude-3-5-sonnet',
+            'max_tokens': 4000
+        },
+        'local': {
+            'endpoint': 'http://localhost:11434/api/generate',
+            'model': 'llama3:latest',      # ← REQUIRED KEY ADDED
+            'max_tokens': 2000             # ← REQUIRED KEY ADDED
+        }
+    }
 
 class MemoryConfig:
     """Memory system configuration"""
@@ -142,3 +161,17 @@ def get_config(env=None):
     if env is None:
         env = os.getenv('FLASK_ENV', 'default')
     return config_map.get(env, DevelopmentConfig)
+
+# Create module-level config instance for backwards compatibility
+config = get_config()
+
+# Add BRAIN_CONFIG to the module for backwards compatibility
+import sys
+current_module = sys.modules[__name__]
+current_module.BRAIN_CONFIG = LLMConfig.BRAIN_CONFIG
+
+# Add other required attributes for brain.py compatibility
+current_module.SANDBOX_ROOT = "/home/kurt/migration-workspace/spatial-constellation-repo/data/workspace"
+current_module.TRASH_DIR = "/home/kurt/migration-workspace/spatial-constellation-repo/data/workspace/.trash"
+current_module.OPS_LOG = "/home/kurt/migration-workspace/spatial-constellation-repo/data/logs/file_ops.log"
+current_module.MODES = ["manual", "auto", "readonly"]
